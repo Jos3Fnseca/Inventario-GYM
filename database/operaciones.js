@@ -45,13 +45,13 @@ db.Entrenadores.insertMany([
 //Actualizar
 
 db.Entrenadores.updateOne(
-  { nombre: "Cristian" },
-  { $set: { numero: "8521-0396" } }
+  { nombre: 'Cristian' },
+  { $set: { numero: '8521-0396' } }
 );
 
 //Eliminar
 
-db.Entrenadores.deleteOne({ nombre: "Ana Gabriel" });
+db.Entrenadores.deleteOne({ nombre: 'Ana Gabriel' });
 
 //------------------------
 //Coleccion Entrenadores_Suplentes
@@ -90,20 +90,24 @@ db.Entrenadores_Suplentes.insertMany([
         numero:'3698-7412',
         e_cubierto:'Cristian'
     }])
+
 //Actualizar 
 
 db.Entrenadores_Suplentes.updateOne(
   { nombre: 'Allan' },
   { $set: { e_cubierto: 'Roy' } }
 );
+
 //Eliminar
 
-db.Entrenadores_Suplentes.deleteOne({ nombre: "Katherine" });
+db.Entrenadores_Suplentes.deleteOne({ nombre: 'Katherine' });
+
 //------------------------
 //Coleccion Clientes
 //------------------------
 
 //Agregar uno
+
 db.Clientes.insertOne({
   nombre:'Jose',
   apellido:'Fonseca',
@@ -111,6 +115,7 @@ db.Clientes.insertOne({
   correo:'josefon@hotmail.com',
   dia_asistido:'2026-09-30'
 })
+
 //Agregar varios
 
 db.Clientes.insertMany([{
@@ -132,53 +137,218 @@ db.Clientes.insertMany([{
   correo:'mariromero@hotmail.com',
   dia_asistido:'2026-09-16'
 }])
+
 //Actualizar 
 
-db.Entrenadores_Suplentes.updateOne(
-  { nombre: 'Allan' },
-  { $set: { e_cubierto: 'Roy' } }
+db.Clientes.updateOne(
+  { nombre: 'Maria' },
+  { $set: { correo: 'marome@gmail.com' } }
 );
+
 //Eliminar
 
-db.Entrenadores_Suplentes.deleteOne({ nombre: "Katherine" });
+db.Clientes.deleteOne({ nombre: 'Maria' });
 
 //------------------------
 //Coleccion Barras
 //------------------------
 
 //Agregar uno
+
+db.Barras.insertOne({
+  tipo:'Barra Z',
+  peso:'10 kg'
+})
+
 //Agregar varios
+
+db.Barras.insertMany([{
+  tipo:'Olimpica',
+  peso:'20 kg'
+},{
+  tipo:'Olimpica negra',
+  peso:'21 kg'
+},{
+  tipo:'Barra en H',
+  peso:'10 kg'
+},{
+  tipo:'Semi olimpica',
+  peso:'12 kg'
+}])
+
 //Actualizar 
+
+db.Barras.updateOne(
+  { tipo: 'Barra H' },
+  { $set: { peso: '8 kg' } }
+);
+
 //Eliminar
+
+db.Barras.deleteOne({ tipo: 'Barra en H' });
+
 //------------------------
 //Coleccion Discos
 //------------------------
 
 //Agregar uno
+
+db.Discos.insertOne({
+  peso: '2.5 lbs',
+  cantidad:'6'
+})
+
 //Agregar varios
+
+db.Discos.insertMany([{
+  peso:'5 lbs',
+  cantidad:'8'
+},{
+  peso:'10 lbs',
+  cantidad:'10'
+},{
+  peso:'25 lbs',
+  cantida:'15'
+},{
+  peso:'35 lbs',
+  cantidad:'8'
+},{
+  peso:'45 lbs',
+  cantidad:'10'
+}])
+
 //Actualizar 
+
+db.Discos.updateOne(
+  { peso: '10 lbs' },
+  { $set: { cantidad: '12' } }
+);
+
 //Eliminar
+
+db.Discos.deleteOne({ peso: '2.5 lbs' });
+
 //------------------------
 //Coleccion Mancuernas
 //------------------------
 
 //Agregar uno
+
+db.Mancuernas.insertOne({
+  peso:'5 lbs',
+  cantidad:'2'
+})
+
 //Agregar varios
+
+db.Mancuernas.insertMany([{
+  peso:'8 lbs',
+  cantidad:'4',
+},{
+  peso:'10 lbs',
+  cantidad:'6'
+},{
+  peso:'15 lbs',
+  cantidad:'10'
+},{
+  peso:'20 lbs',
+  cantidad:'8'
+},{
+  peso:'25 lbs',
+  cantidad:'6'
+},{
+  peso:'30 lbs',
+  cantidad:'8'
+},{
+  peso:'35 lbs',
+  cantidad:'4'
+},{
+  peso:'40 lbs',
+  cantidad:'4'
+},{
+  peso:'45 lbs',
+  cantidad:'4'
+},{
+  peso:'50 lbs',
+  cantidad:'2'
+},{
+  peso:'66 lbs',
+  cantidad:'2'
+}
+])
+
 //Actualizar 
+
+db.Mancuernas.updateOne(
+  { peso: '10 lbs' },
+  { $set: { cantidad: '8' } }
+);
+
 //Eliminar
+
+db.Mancuernas.deleteOne({ peso: '5 lbs' });
+
 //------------------------
 //Coleccion Máquinas
 //------------------------
 
 //Agregar uno
-//Agregar varios
-//Actualizar 
-//Eliminar
-//------------------------
-//Coleccion Otros
-//------------------------
 
-//Agregar uno
+db.Maquinas.insertOne({
+  nombre:'Rack',
+  cantidad:'1'
+})
+
 //Agregar varios
+
+db.Maquinas.insertMany([{
+  nombre:'Cross over',
+  cantidad:'1'
+},{
+  nombre:'Extensión de rodilla',
+  cantidad:'2'
+},{
+  nombre:'Peck Deck',
+  cantidad:'1'
+},{
+  nombre:'Press de pierna',
+  cantidad:'1'
+},{
+  nombre:'Banca de flexión-rack',
+  cantidad:'1'
+},{
+  nombre:'Banca Plana',
+  cantidad:'1'
+},{
+  nombre:'Banca inclinada',
+  cantidad:'2'
+},{
+  nombre:'Press militar',
+  cantidad:'1'
+},{
+  nombre:'Hip thrust',
+  cantidad:'1'
+},{
+  nombre:'Spinning',
+  cantidad:'2'
+},{
+  nombre:'Bicicleta reclinada',
+  cantidad:'1'
+},{
+  nombre:'Sentadilla Sysy',
+  cantidad:'1'
+},{
+  nombre:'Banco predicador',
+  cantidad:'1'
+}])
+
 //Actualizar 
+
+db.Maquinas.updateOne(
+  { nombre: 'Cross over' },
+  { $set: { cantidad: '2' } }
+);
+
 //Eliminar
+
+db.Maquinas.deleteOne({ nombre: 'Cross over' });
