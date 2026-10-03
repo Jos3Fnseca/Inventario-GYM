@@ -64,7 +64,7 @@ db.Entrenadores_Suplentes.insertOne({
   apellido: 'Campos',
   numero: '7412-3698',
   dia: '2026-09-18',
-  e_cubierto:'Roy'
+  e_cubierto:{nombre:'Roy'}
 })
 
 //Agregar varios
@@ -74,75 +74,74 @@ db.Entrenadores_Suplentes.insertMany([
         nombre: 'Elizabeth',
         apellido: 'Campos',
         numero: '7412-3698',
-        dia: '2026-09-18',
-        e_cubierto:'Roy'
+        dia: '2026-09-17',
+        e_cubierto:{nombre:'Roy'}
     },
     {
         nombre:'Allan',
         apellido:'Fonseca',
         numero:'8569-1254',
         dia:'2026-09-17',
-        e_cubierto:'Cristian'
+        e_cubierto:{nombre:'Cristian'}
     },
     {
         nombre:'Katherine',
         apellido:'Rodriguez',
         numero:'3698-7412',
-        e_cubierto:'Cristian'
+        dia:'2026-09-30',
+        e_cubierto:{nombre:'Cristian'}
+    },{
+      nombre:'Allan',
+      apellido:'Fonseca',
+      numero:'8569-1254',
+      dia:'2026-09-26',
+      e_cubierto:{nombre:'Cristian'}
     }])
 
 //Actualizar 
 
 db.Entrenadores_Suplentes.updateOne(
-  { nombre: 'Allan' },
-  { $set: { e_cubierto: 'Roy' } }
-);
+  { nombre: 'Elizabeth', dia: '2026-09-17' },
+  { $set: { dia: '2026-09-10' } }
+)
 
 //Eliminar
 
 db.Entrenadores_Suplentes.deleteOne({ nombre: 'Katherine' });
 
 //------------------------
-//Coleccion Clientes
+//Coleccion Asistencia
 //------------------------
 
 //Agregar uno
 
-db.Clientes.insertOne({
+db.Asistencia.insertOne({
   nombre:'Jose',
   apellido:'Fonseca',
-  numero:'8968-1735',
-  correo:'josefon@hotmail.com',
   dia_asistido:'2026-09-30'
 })
 
 //Agregar varios
 
-db.Clientes.insertMany([{
+db.Asistencia.insertMany([{
   nombre:'Valeria',
   apellido:'Pereira',
-  numero:'4569-9874',
-  correo:'valper@gmail.com',
   dia_asistido:'2026-09-03'
 },{
   nombre:'Natalia',
   apellido:'Solano',
-  numero:'8520-0147',
-  correo:'solanat@gmail.com',
   dia_asistido:'2026-10-02'
 },{
   nombre:'Maria',
   apellido:'Romero',
-  numero:'4521-0026',
-  correo:'mariromero@hotmail.com',
   dia_asistido:'2026-09-16'
 }])
 
 //Actualizar 
 
-db.Clientes.updateOne(
+db.Asistencia.updateOne(
   { nombre: 'Maria' },
-  { $set: { correo: 'marome@gmail.com' } }
+  { $set: { apellido: 'Gomez' } }
 );
 
 //Eliminar
@@ -352,3 +351,83 @@ db.Maquinas.updateOne(
 //Eliminar
 
 db.Maquinas.deleteOne({ nombre: 'Cross over' });
+
+//Consultas
+
+//Cantidad de personas que asistieron en un día específico
+
+db.Asistencia.aggregate([
+  {
+    $match: {
+      dia_asistido: "2026-09-30" // Comparación directa
+    }
+  },
+  {
+    $group: {
+      _id: { fecha: "$dia_asistido" },
+      Personas_que_asistieron_ese_dia: { $sum: 1 }
+    }
+  }
+])
+
+//Cantidad de personas que asistieron en un rango de fechas
+
+db.Asistencia.aggregate([
+  {
+    $match: {
+      dia_asistido: { $gte: "2026-09-01", $lte: "2026-10-02" }
+    }
+  },
+  {
+    $group: {
+      _id: { fecha: "$dia_asistido" },
+      asistencia_de_ese_dia: { $sum: 1 }
+    }
+  },
+  { $sort: { "_id.fecha": 1 } }
+])
+
+//Cantidad de veces que un entrenador fue cubierto
+
+db.Entrenadores_Suplentes.aggregate([
+  {
+    $group: {
+      _id: "$e_cubierto.nombre",
+      Veces_cubierto: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      Veces_cubierto: -1
+    }
+  }
+])
+
+//Máquinas que se compraron y su cantidad
+
+db.Maquinas.aggregate([
+  {
+    $project: {
+      _id: 0,
+      maquina: "$nombre",
+      cantidadComprada: "$cantidad"
+    }
+  }
+])
+
+//Top 5 mancuernas con más cantidad y la cantidad que tienen
+
+db.Mancuernas.aggregate([
+  {
+    $group: {
+      _id: "$peso",
+      cantidadTotal: { $sum: "$cantidad" }
+    }
+  },
+  {
+    $sort: { cantidadTotal: -1 }
+  },
+  {
+    $limit: 5
+  }
+])
