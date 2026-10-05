@@ -1,8 +1,8 @@
 # Sistema online para el control de inventario para un gimnasio
 
-Este proyecto consiste en la creación de una **API con MongoDB** para un **gimnasio**, junto con un **frontend**. Este proyecto va a permitir a los dueños, o a los encargados del inventario, realizar las consultas necesarias para visualizar los activos que poseen. Además seran capaces de añadir, eliminar o modificar los diferentes equipos que posea el gimnasio.
+Este proyecto consiste en la creación de una **API con MongoDB** para un **gimnasio**, junto con un **frontend**. Este proyecto va a permitir a los dueños, o a los encargados del inventario, realizar las consultas necesarias para visualizar los activos que poseen. Además seran capaces de añadir, eliminar o modificar los diferentes equipos que posea el gimnasio por medio de una interfaz gráfica
 
-##  Colecciones y Ejemplos
+##  🎯 Colecciones y Ejemplos
 
 ### 👥 Entrenadores
 ```json
