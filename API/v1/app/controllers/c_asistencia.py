@@ -18,7 +18,7 @@ def obtener_Asistencias():
     return jsonify(asistencia), 200
 
 @asistencia_endpoints.route('/asistencia_agregar', methods=['POST'])
-def crear_Asistencia():#Revisar
+def crear_Asistencia():
     data = request.get_json()
 
     if not data:

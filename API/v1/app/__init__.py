@@ -15,6 +15,8 @@ def create_app():
     CORS(app, origins="*")
 
     from app.controllers.c_asistencia import asistencia_endpoints
-    app.register_blueprint(asistencia_endpoints, url_prefix='/asistencia/api/v1')
+    app.register_blueprint(asistencia_endpoints, url_prefix='/api/v1/Asistencia')
+    from app.controllers.c_barras import barras_endpoints
+    app.register_blueprint(barras_endpoints, url_prefix='/api/v1/Barras')
 
     return app
