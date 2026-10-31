@@ -1,5 +1,5 @@
 from flask import Flask, app
-from pymongo import PyMongo
+from flask_pymongo import PyMongo
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv

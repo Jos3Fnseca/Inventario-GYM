@@ -17,22 +17,22 @@ def obtener_Asistencias():
     asistencia = M_Asistencia.obtener_todos()
     return jsonify(asistencia), 200
 
-@asistencia_endpoints.route('/asistencia', methods=['POST'])
-def crear_Asistencia():
+@asistencia_endpoints.route('/asistencia_agregar', methods=['POST'])
+def crear_Asistencia():#Revisar
     data = request.get_json()
 
     if not data:
         return jsonify({"error": "Datos de asistencia vacios"}), 400
 
     # Validar los campos requeridos
-    if "nombre" not in data or "apellido" not in data or "fecha" not in data:
+    if "nombre" not in data or "apellido" not in data or "dia_asistido" not in data:
         return jsonify({"error": "Faltan campos requeridos para la asistencia"}), 400
 
     #se crea la asistencia
     asistencia_id = M_Asistencia.crear(data)
     return jsonify({"message": "Asistencia creada exitosamente", "id": str(asistencia_id)}), 201
 
-@asistencia_endpoints.route('/asistencia/<id>', methods=['PUT'])
+@asistencia_endpoints.route('/asistencia_actualizar/<id>', methods=['PUT'])
 def actualizar_Asistencia(id):
     data = request.get_json()
     if data is None:
@@ -44,7 +44,7 @@ def actualizar_Asistencia(id):
 
     return jsonify({"Asistencia actualizada exitosamente ": id}), 200
 
-@asistencia_endpoints.route('/asistencia/<id>', methods=['DELETE'])
+@asistencia_endpoints.route('/asistencia_eliminar/<id>', methods=['DELETE'])
 def eliminar_Asistencia(id):
     resultado = M_Asistencia.eliminar(id)
     if resultado == -1:
@@ -53,7 +53,7 @@ def eliminar_Asistencia(id):
     return jsonify({"mensaje": f"Asistencia con id {id} se elimino exitosamente"}), 200
 
 
-@asistencia_endpoints.route('/asistencia/<id>', methods=['GET'])
+@asistencia_endpoints.route('/asistencia_buscar/<id>', methods=['GET'])
 def obtener_AsistenciaId(id):
     asistencia = M_Asistencia.obtener_por_id(id)
     if asistencia is None:
