@@ -68,3 +68,109 @@ Este proyecto consiste en la creación de una **API con MongoDB** para un **gimn
 ## 👤 Integrante del Proyecto
 
 - Jose Pablo Fonseca Fernández
+
+# 🔗 Endpoints de la base de datos Inventario GYM
+
+### 1.Endpoint para obtener todas las asistencias
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
+* **Descripción:** Obtiene una lista de todos los libros disponibles en el sistema.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
+```
+
+**Ejemplo de respuesta:**
+
+```json
+[
+    {
+        "_id": "6ac120ba1a52d5320d6c6af4", 
+        "nombre": "Jose", 
+        "apellido": "Fonseca", 
+        "dia_asistido": "2026-09-30"
+    }, 
+    {
+        "_id": "6ac120c81a52d5320d6c6af5", 
+        "nombre": "Valeria", 
+        "apellido": "Pereira", 
+        "dia_asistido": "2026-09-03"
+     },
+     {
+        "_id": "6ac120c81a52d5320d6c6af6", 
+        "nombre": "Natalia", 
+        "apellido": "Solano", 
+        "dia_asistido": "2026-10-02"
+    },
+    {
+        "_id": "6ac120c81a52d5320d6c6af7", 
+        "nombre": "Maria", 
+        "apellido": "Gomez", 
+        "dia_asistido": "2026-09-16"
+    },
+    {
+        "_id": "6ac121421a52d5320d6c6af8", 
+        "nombre": "Mariana", 
+        "apellido": "Jimenez", 
+        "dia_asistido": "2026-09-30"
+    },
+    {
+        "_id": "6ac121421a52d5320d6c6af9", 
+        "nombre": "Paola", 
+        "apellido": "Hernandez", 
+        "dia_asistido": "2026-10-03"
+    },
+    {
+        "_id": "6ac121421a52d5320d6c6afa",
+        "nombre": "Margarita",
+        "apellido": "Mendez",
+        "dia_asistido": "2026-09-02"
+    },
+    {
+        "_id": "6ac1217d1a52d5320d6c6afb",
+        "nombre": "Hernan", 
+        "apellido": "Jimenez", 
+        "dia_asistido": "2026-09-03"
+    },
+    {
+        "_id": "6ac1217d1a52d5320d6c6afc", 
+        "nombre": "Pedro", 
+        "apellido": "Fernández", 
+        "dia_asistido": "2026-10-02"
+    }, 
+    {
+        "_id": "6ac1217d1a52d5320d6c6afd", 
+        "nombre": "Rodrigo", 
+        "apellido": "Campos", 
+        "dia_asistido": "2026-09-30"
+    },
+    {
+        "_id": "6ac6d37883d6bc779e5a9874", 
+        "nombre": "Maria", 
+        "apellido": "Rodriguez", 
+        "dia_asistido": "2026-09-30"
+    }, 
+    {
+        "_id": "6ac6d37883d6bc779e5a9876", 
+        "nombre": "Ana", 
+        "apellido": "Mora", 
+        "dia_asistido": "2026-09-16"
+    }, 
+    {"_id": "6ac6d37883d6bc779e5a9875", 
+    "nombre": "Carlos", 
+    "apellido": "Jimenez", 
+    "dia_asistido": "2026-10-02"
+    }, 
+    {
+        "_id": "6ac6d37883d6bc779e5a9878", 
+        "nombre": "Sofia", 
+        "apellido": "Perez", 
+        "dia_asistido": "2026-09-30"
+    }, 
+    {
+        "_id": "6ae618081679f6e645f28e4a", 
+        "nombre": "Maria", 
+        "apellido": "Fonseca", 
+        "dia_asistido": "31-10-2026"
+    }]
