@@ -71,17 +71,19 @@ Este proyecto consiste en la creación de una **API con MongoDB** para un **gimn
 
 # 🔗 Endpoints de la base de datos Inventario GYM
 
-### 1.Endpoint para obtener todas las asistencias
+### 1.Enpoints Asistencia
+
+### Obtener todas las asistencias
 
 * **Método:** `GET`
 * **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
-* **Descripción:** Obtiene una lista de todos los libros disponibles en el sistema.
+* **Descripción:** Obtiene una lista de todas las asistencias del gimnasio
 
 ```http
 GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
 ```
 
-**Ejemplo de respuesta:**
+**Respuesta del endpoint:**
 
 ```json
 [
@@ -174,3 +176,194 @@ GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
         "apellido": "Fonseca", 
         "dia_asistido": "31-10-2026"
     }]
+```
+
+### Agregar una asistencia nueva
+
+* **Método:** `POST`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia_agregar`
+* **Descripción:** Se registra una nueva asistencia.
+
+```http
+POST http://127.0.0.1:5000/api/v1/Asistencia/asistencia_agregar
+```
+
+**Datos de entrada del endpoint:**
+
+```json
+{
+    "nombre":"Juana",
+    "apellido":"Herrera",
+    "dia_asistido":"30-11-2026"
+}
+```
+**Respuesta del endpoint**
+
+```json
+{"message": "Asistencia creada exitosamente", "id": "6aea917e996e80c1d0021b81"}
+```
+
+## Modificar una asistencia
+
+* **Método:** `PUT`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia_actualizar/`
+* **Descripción:** Se modifica una asistencia existente.
+
+```http
+PUT http://127.0.0.1:5000/api/v1/Asistencia/asistencia_actualizar/6aea917e996e80c1d0021b81
+```
+
+**Datos de entrada del endpoint**
+
+```json
+{
+    "nombre":"Juana",
+    "apellido":"Campos",
+    "dia_asistido":"30-11-2026"
+}
+```
+
+**Respuesta del endpoint**
+
+```json
+{"Asistencia actualizada exitosamente ": "6aea917e996e80c1d0021b81"}
+```
+
+## Eliminar una asistencia
+
+* **Método:** `DELETE`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia_eliminar/`
+* **Descripción:** Se elimina una asistencia ya registrada del inventario.
+
+```http
+DELETE http://127.0.0.1:5000/api/v1/Asistencia/asistencia_eliminar/6aea917e996e80c1d0021b81
+```
+
+**Respuesta del endpoint**
+
+```json
+{"mensaje": "Asistencia con id 6aea917e996e80c1d0021b81 se elimino exitosamente"}
+```
+
+## Buscar una asistencia
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia_buscar/`
+* **Descripción:** Se busca una asistencia que exista dentro del inventario.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia_buscar/6aea917e996e80c1d0021b85
+```
+
+**Respuesta del endpoint**
+
+```json
+{
+    "_id": "6ac6d37883d6bc779e5a9878", 
+    "nombre": "Sofia", 
+    "apellido": "Perez", 
+    "dia_asistido": "2026-09-30"
+}
+```
+
+### 2.Endpoints de Barras
+
+### Obtener todas las Barras
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
+* **Descripción:** Obtiene una lista de todas las barras del gimnasio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
+```
+
+**Datos de entrada del endpoint**
+
+```json
+```
+
+**Respuesta del endpoint**
+
+```json
+```
+
+### Agregar una barra
+
+* **Método:** `POST`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
+* **Descripción:** Se agrega una barra nueva al gimnasio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
+```
+
+**Datos de entrada del endpoint**
+
+```json
+```
+
+**Respuesta del endpoint**
+
+```json
+```
+
+### Actualizar barras
+
+* **Método:** `PUT`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
+* **Descripción:** Se actualiza una barra existente en el gimnasio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
+```
+
+**Datos de entrada del endpoint**
+
+```json
+```
+
+**Respuesta del endpoint**
+
+```json
+```
+
+### Eliminar una barra
+
+* **Método:** `DELETE`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
+* **Descripción:** Se elimina una barra del gimnasio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
+```
+
+**Datos de entrada del endpoint**
+
+```json
+```
+
+**Respuesta del endpoint**
+
+```json
+```
+
+### Buscar una barra del gimnasio
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia`
+* **Descripción:** Se busca una barra en el gimansio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia
+```
+
+**Datos de entrada del endpoint**
+
+```json
+```
+
+**Respuesta del endpoint**
+
+```json
+```
