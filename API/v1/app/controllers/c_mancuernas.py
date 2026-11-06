@@ -1,11 +1,19 @@
 from flask import Blueprint, request, jsonify
 from app.models.m_mancuernas import  M_Mancuernas
+from app.utils.token import validar_token
 
 mancuernas_endpoints = Blueprint('mancuernas', __name__)
 
+def verificar_token():
+    return validar_token()
+
 @mancuernas_endpoints.route('/mancuernas', methods=['GET'])
 def obtener_mancuernas():
+
     idmancuernas = request.args.get('id')
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
 
     if idmancuernas:
         mancuerna = M_Mancuernas.obtener_por_id(idmancuernas)
@@ -20,6 +28,11 @@ def obtener_mancuernas():
 
 @mancuernas_endpoints.route('/mancuernas_agregar', methods=['POST'])
 def crear_Mancuernas():
+    
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
 
     if not data:
@@ -35,6 +48,11 @@ def crear_Mancuernas():
 
 @mancuernas_endpoints.route('/mancuernas_actualizar/<id>', methods=['PUT'])
 def actualizar_Mancuernas(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
     if data is None:
         return jsonify({"error": "Datos de mancuernas vacios"}), 400
@@ -48,6 +66,11 @@ def actualizar_Mancuernas(id):
 
 @mancuernas_endpoints.route('/mancuernas_eliminar/<id>', methods=['DELETE'])
 def eliminar_Mancuernas(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     resultado = M_Mancuernas.eliminar(id)
     if resultado == -1:
         return jsonify({"error": "Error al eliminar la mancuerna"}), 404
@@ -56,7 +79,12 @@ def eliminar_Mancuernas(id):
 
 
 @mancuernas_endpoints.route('/mancuernas_buscar/<id>', methods=['GET'])
-def obtener_MancuernasId(id):   
+def obtener_MancuernasId(id): 
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+      
     mancuerna = M_Mancuernas.obtener_por_id(id)
     if mancuerna is None:
         return jsonify({"error": "No se encontro la mancuerna que está buscando"}), 404

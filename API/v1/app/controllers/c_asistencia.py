@@ -1,11 +1,19 @@
 from flask import Blueprint, request, jsonify
 from app.models.m_asistencia import M_Asistencia
+from app.utils.token import validar_token
 
 asistencia_endpoints = Blueprint('asistencia_endpoints', __name__)
+
+def verificar_token():
+    return validar_token()
 
 @asistencia_endpoints.route('/asistencia', methods=['GET'])
 def obtener_Asistencias():
     idAsistencia = request.args.get('id')
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
 
     if idAsistencia:
         asistencia = M_Asistencia.obtener_por_id(idAsistencia)
@@ -19,7 +27,12 @@ def obtener_Asistencias():
 
 @asistencia_endpoints.route('/asistencia_agregar', methods=['POST'])
 def crear_Asistencia():
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
     data = request.get_json()
+
 
     if not data:
         return jsonify({"error": "Datos de asistencia vacios"}), 400
@@ -34,6 +47,11 @@ def crear_Asistencia():
 
 @asistencia_endpoints.route('/asistencia_actualizar/<id>', methods=['PUT'])
 def actualizar_Asistencia(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
     if data is None:
         return jsonify({"error": "Datos de asistencia vacios"}), 400
@@ -46,6 +64,11 @@ def actualizar_Asistencia(id):
 
 @asistencia_endpoints.route('/asistencia_eliminar/<id>', methods=['DELETE'])
 def eliminar_Asistencia(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     resultado = M_Asistencia.eliminar(id)
     if resultado == -1:
         return jsonify({"error": "Error al eliminar la asistencia"}), 404
@@ -55,6 +78,11 @@ def eliminar_Asistencia(id):
 
 @asistencia_endpoints.route('/asistencia_buscar/<id>', methods=['GET'])
 def obtener_AsistenciaId(id):
+    
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     asistencia = M_Asistencia.obtener_por_id(id)
     if asistencia is None:
         return jsonify({"error": "Asistencia no encontrada"}), 404

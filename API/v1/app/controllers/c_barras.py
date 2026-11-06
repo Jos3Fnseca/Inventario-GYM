@@ -1,12 +1,19 @@
 from flask import Blueprint, request, jsonify
 from app.models.m_barras import M_Barras
-
+from app.utils.token import validar_token
 
 barras_endpoints = Blueprint('barras_endpoints', __name__)
+
+def verificar_token():
+    return validar_token()
 
 @barras_endpoints.route('/barras', methods=['GET'])
 def obtener_Barras():
     idBarras = request.args.get('id')
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
 
     if idBarras:
         barra = M_Barras.obtener_por_id(idBarras)
@@ -21,6 +28,11 @@ def obtener_Barras():
 
 @barras_endpoints.route('/barras_agregar', methods=['POST'])
 def crear_Barras():
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
 
     if not data:
@@ -37,6 +49,11 @@ def crear_Barras():
 
 @barras_endpoints.route('/barras_actualizar/<id>', methods=['PUT'])
 def actualizar_Barras(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
     if data is None:
         return jsonify({"error": "Datos de barras vacios"}), 400
@@ -50,6 +67,11 @@ def actualizar_Barras(id):
 
 @barras_endpoints.route('/barras_eliminar/<id>', methods=['DELETE'])
 def eliminar_Barras(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     resultado = M_Barras.eliminar(id)
     if resultado == -1:
         return jsonify({"error": "Error al eliminar la barra"}), 404
@@ -58,7 +80,12 @@ def eliminar_Barras(id):
 
 
 @barras_endpoints.route('/barras_buscar/<id>', methods=['GET'])
-def obtener_BarrasId(id):   
+def obtener_BarrasId(id):  
+     
+    error_token = verificar_token()
+    if error_token: 
+        return error_token  # Retorna el error de token si es inválido
+    
     barra = M_Barras.obtener_por_id(id)
     if barra is None:
         return jsonify({"error": "No se encontro la barra que está buscando"}), 404

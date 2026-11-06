@@ -1,12 +1,20 @@
 from flask import Blueprint, request, jsonify
 from app.models.m_discos import  M_Discos
+from app.utils.token import validar_token
 
 discos_endpoints = Blueprint('discos', __name__)
+
+def verificar_token():
+    return validar_token()
 
 @discos_endpoints.route('/discos', methods=['GET'])
 def obtener_discos():
     iddisco = request.args.get('id')
 
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     if iddisco:
         disco = M_Discos.obtener_por_id(iddisco)
         if disco:
@@ -20,6 +28,11 @@ def obtener_discos():
 
 @discos_endpoints.route('/discos_agregar', methods=['POST'])
 def crear_Discos():
+    
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
 
     if not data:
@@ -35,6 +48,11 @@ def crear_Discos():
 
 @discos_endpoints.route('/discos_actualizar/<id>', methods=['PUT'])
 def actualizar_Discos(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     data = request.get_json()
     if data is None:
         return jsonify({"error": "Datos de discos vacios"}), 400
@@ -48,6 +66,11 @@ def actualizar_Discos(id):
 
 @discos_endpoints.route('/discos_eliminar/<id>', methods=['DELETE'])
 def eliminar_Discos(id):
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+    
     resultado = M_Discos.eliminar(id)
     if resultado == -1:
         return jsonify({"error": "Error al eliminar el disco"}), 404
@@ -56,7 +79,12 @@ def eliminar_Discos(id):
 
 
 @discos_endpoints.route('/discos_buscar/<id>', methods=['GET'])
-def obtener_DiscosId(id):   
+def obtener_DiscosId(id): 
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+      
     disco = M_Discos.obtener_por_id(id)
     if disco is None:
         return jsonify({"error": "No se encontro el disco que está buscando"}), 404
