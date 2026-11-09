@@ -266,6 +266,56 @@ GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia_buscar/6aea917e996e80c1d0
 }
 ```
 
+## Buscar una asistencia en una fecha en especifico
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia_buscar_por_fecha/`
+* **Descripción:** Se busca la cantidad de personas que asistieron en una fecha al gimnasio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia_buscar_por_fecha/2026-09-30
+```
+
+**Respuesta del endpoint**
+
+```json
+[{
+    "_id": "{'fecha': '2026-09-30'}", 
+    "Personas_que_asistieron_ese_dia": 5
+}]
+```
+
+## Buscar una asistencia en un rango de fechas en especifico
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Asistencia/asistencia_rango_fechas/<fecha_inicio>/<fecha_fin>`
+* **Descripción:** Se busca la cantidad de personas que asistieron en un rango de fechas al gimnasio.
+
+```http
+GET http://127.0.0.1:5000/api/v1/Asistencia/asistencia_rango_fechas/2026-09-01/2026-10-01
+```
+
+**Respuesta del endpoint**
+
+```json
+[{
+    "_id": "{'fecha': '2026-09-02'}", 
+    "Personas_que_asistieron_ese_dia": 1
+    }, 
+    {
+    "_id": "{'fecha': '2026-09-03'}", 
+    "Personas_que_asistieron_ese_dia": 2
+    }, 
+    {
+    "_id": "{'fecha': '2026-09-16'}", 
+    "Personas_que_asistieron_ese_dia": 2
+    },
+    {
+    "_id": "{'fecha': '2026-09-30'}", 
+    "Personas_que_asistieron_ese_dia": 5
+}]
+```
+
 ### 2.Endpoints de Barras
 
 ### Obtener todas las Barras
@@ -670,6 +720,49 @@ GET http://127.0.0.1:5000/api/v1/Mancuernas/mancuernas_buscar/6ac03c1b5655be6ce5
 
 ```json
 {"_id": "6ac03c1b5655be6ce588d879", "peso": "66 lbs", "cantidad": "2"}
+```
+
+### Top 5 mancuernas
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Mancuernas/mancuernas_top5`
+* **Descripción:** Se obtienen las 5 mancuernas con más cantidad y sus pesos.
+
+```http
+http://127.0.0.1:5000/api/v1/Mancuernas/mancuernas_top5
+```
+
+
+**Respuesta del endpoint**
+
+```json
+[{
+    "_id": "6ac03c1b5655be6ce588d874", 
+    "peso": "30 lbs", 
+    "cantidad": "8"
+    }, 
+    {
+    "_id": "6ac03c1b5655be6ce588d870", 
+    "peso": "10 lbs", 
+    "cantidad": "8"
+    },
+    {
+    "_id": "6ac03c1b5655be6ce588d872", 
+    "peso": "20 lbs", 
+    "cantidad": "8"
+    },
+    {
+    "_id": "6ac03c1b5655be6ce588d873", 
+    "peso": 
+    "25 lbs", 
+    "cantidad": "6"
+    }, 
+    {
+    "_id": "6ac03c1b5655be6ce588d877", 
+    "peso": "45 lbs", 
+    "cantidad": "4"
+    }
+    ]
 ```
 
 ### 5.Endpoints de las máquinas

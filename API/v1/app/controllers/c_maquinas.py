@@ -91,3 +91,4 @@ def obtener_MaquinasId(id):
         return jsonify({"error": "No se encontro la maquina que está buscando"}), 404
 
     return jsonify(maquina), 200
+

@@ -44,3 +44,15 @@ class M_Mancuernas:
             return result.deleted_count
         except:
             return -1
+
+    @staticmethod
+    def top5():
+        try:
+            mancuernas_cursor = mongo.db.Mancuernas.find().sort("cantidad", -1).limit(5)
+            mancuernas = []
+            for mancuerna in mancuernas_cursor:
+                mancuerna['_id'] = str(mancuerna['_id'])  
+                mancuernas.append(mancuerna)
+            return mancuernas
+        except:
+            return []

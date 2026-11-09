@@ -90,3 +90,14 @@ def obtener_MancuernasId(id):
         return jsonify({"error": "No se encontro la mancuerna que está buscando"}), 404
 
     return jsonify(mancuerna), 200
+
+@mancuernas_endpoints.route('/mancuernas_top5', methods=['GET'])
+def obtener_top5_mancuernas():
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+
+    mancuernas_top5 = M_Mancuernas.top5()
+    
+    return jsonify(mancuernas_top5), 200

@@ -44,3 +44,4 @@ class M_Maquinas:
             return result.deleted_count
         except:
             return -1
+

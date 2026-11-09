@@ -49,5 +49,37 @@ class M_Asistencia:
             return result.deleted_count
         except:
             return -1
+
+    @staticmethod
+    def buscar_por_fecha(dia_asistido):
+        try:
+            asistencia_cursor = mongo.db.Asistencia.aggregate([
+                {"$match": {"dia_asistido": dia_asistido}},
+                {"$group": {"_id": {"fecha": "$dia_asistido"}, "Personas_que_asistieron_ese_dia": {"$sum": 1}}}
+            ])
+            asistencias = []
+            for asistencia in asistencia_cursor:
+                asistencia['_id'] = str(asistencia['_id'])  
+                asistencias.append(asistencia)
+            return asistencias
+        except:
+            return []
+
+    @staticmethod
+    def buscar_rango_fechas(fecha_inicio, fecha_fin):
+        try:
+            asistencia_cursor = mongo.db.Asistencia.aggregate([
+                {"$match": {"dia_asistido": {"$gte": fecha_inicio, "$lte": fecha_fin}}},
+                {"$group": {"_id": {"fecha": "$dia_asistido"}, "Personas_que_asistieron_ese_dia": {"$sum": 1}}},
+                {"$sort": {"_id.fecha": 1}}
+            ])
+            asistencias = []
+            for asistencia in asistencia_cursor:
+                asistencia['_id'] = str(asistencia['_id'])  
+                asistencias.append(asistencia)
+            return asistencias
+        except:
+            return []
+
                 
                

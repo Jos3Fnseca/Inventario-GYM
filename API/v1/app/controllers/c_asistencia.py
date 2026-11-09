@@ -87,3 +87,27 @@ def obtener_AsistenciaId(id):
     if asistencia is None:
         return jsonify({"error": "Asistencia no encontrada"}), 404
     return jsonify(asistencia), 200
+
+@asistencia_endpoints.route('/asistencia_buscar_por_fecha/<dia_asistido>', methods=['GET'])
+def obtener_AsistenciaPorFecha(dia_asistido):
+    
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+
+    asistencia = M_Asistencia.buscar_por_fecha(dia_asistido)
+    if asistencia is None:
+        return jsonify({"error": "No se encontró asistencia para la fecha especificada"}), 404
+    return jsonify(asistencia), 200
+
+@asistencia_endpoints.route('/asistencia_rango_fechas/<fecha_inicio>/<fecha_fin>', methods=['GET'])
+def obtener_AsistenciaRangoFechas(fecha_inicio, fecha_fin):
+    
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+
+    asistencia = M_Asistencia.buscar_rango_fechas(fecha_inicio, fecha_fin)
+    if asistencia is None:
+        return jsonify({"error": "No se encontraron asistencias en el rango de fechas especificado"}), 404
+    return jsonify(asistencia), 200
