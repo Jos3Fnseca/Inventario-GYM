@@ -931,3 +931,20 @@ GET http://127.0.0.1:5000/api/v1/Maquinas/maquinas_buscar/6ac03efb5655be6ce588d8
 ```json
 {"_id": "6ac03efb5655be6ce588d88e", "nombre": "Banca inclinada", "cantidad": "2"}
 ```
+
+### Cantidad de máquinas en el gimnasio
+
+* **Método:** `GET`
+* **Endpoint:** `http://127.0.0.1:5000/api/v1/Maquinas/maquinas_cantidad`
+* **Descripción:** Se busca una máquina en el gimansio.
+
+```http
+http://127.0.0.1:5000/api/v1/Maquinas/maquinas_cantidad
+```
+
+
+**Respuesta del endpoint**
+
+```json
+{"La cantidad de maquinas es de: ": 13}
+```

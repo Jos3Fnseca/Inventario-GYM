@@ -92,3 +92,15 @@ def obtener_MaquinasId(id):
 
     return jsonify(maquina), 200
 
+@maquinas_endpoints.route('/maquinas_cantidad', methods=['GET'])
+def obtener_cantidad_maquinas():
+
+    error_token = verificar_token()
+    if error_token:
+        return error_token  # Retorna el error de token si es inválido
+
+    cantidad = M_Maquinas.cantidad_maquinas()
+    if cantidad == -1:
+        return jsonify({"error": "Hubo un error, intentelo de nuevo más tarde"}), 500
+
+    return jsonify({"La cantidad de maquinas es de: ": cantidad}), 200

@@ -45,3 +45,10 @@ class M_Maquinas:
         except:
             return -1
 
+    @staticmethod
+    def cantidad_maquinas():
+        try:
+            count = mongo.db.Maquinas.count_documents({})
+            return count
+        except:
+            return -1
